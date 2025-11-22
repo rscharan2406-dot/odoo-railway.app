@@ -7,9 +7,11 @@ while ! nc -z "$ODOO_DB_HOST" "$ODOO_DB_PORT"; do
 done
 echo "Database is reachable!"
 
-# Create temporary odoo.conf
-CONF_PATH="/etc/odoo/odoo.conf"
+# Create config directory
 mkdir -p /etc/odoo
+
+# Create odoo.conf dynamically
+CONF_PATH="/etc/odoo/odoo.conf"
 
 cat > "$CONF_PATH" <<EOF
 [options]
@@ -21,8 +23,9 @@ db_password = ${ODOO_DB_PASSWORD}
 data_dir = /var/lib/odoo
 EOF
 
-echo "Starting Odoo..."
+echo "Starting Odoo with base initialization if needed..."
 
+# Run Odoo and install base if DB is empty
 exec odoo \
   -i base \
   --config="$CONF_PATH" \
