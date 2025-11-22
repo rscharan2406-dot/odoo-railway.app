@@ -21,6 +21,7 @@ db_port = ${ODOO_DB_PORT}
 db_user = ${ODOO_DB_USER}
 db_password = ${ODOO_DB_PASSWORD}
 data_dir = /var/lib/odoo
+addons_path = /usr/lib/python3/dist-packages/odoo/addons,/var/lib/odoo/addons/18.0
 EOF
 
 echo "Starting Odoo with base initialization if needed..."
